@@ -1,23 +1,24 @@
-local Connection
-lua_library:CreateWindow('TenaCustom', 'http://www.roblox.com/asset/?id=6441978333', UDim2.new(0.950, 0, 0.272, 0))
-lua_library:CreateButton('blue pack', 'TenaCustom', 'blue_pack',function()
-    if library.Constants.blue_pack then
-        local cam = workspace.CurrentCamera
-        Connection = cam.Viewmodel.ChildAdded:Connect(function(v)
-            if v:FindFirstChild("Handle") then
-                pcall(function()
-                    v:FindFirstChild("Handle").Size = v:FindFirstChild("Handle").Size / 1.5
-                    v:FindFirstChild("Handle").Material = Enum.Material.Neon
-                    v:FindFirstChild("Handle").TextureID = ""
-                    v:FindFirstChild("Handle").Color = Color3.fromRGB(0, 0, 255)
-                end)
-                local vname = string.lower(v.Name)
-                if vname:find("sword") or vname:find("blade") then
-                    v:FindFirstChild("Handle").MeshId = "rbxassetid://12996309727"
-                end
+lua_library:CreateButton('ACDISABLER', 'Combat', 'ac_disabler',function()
+    if lua_library.Constants.ac_disabler then
+        repeat task.wait()
+            if cedoscript['functions']:getAliveStateOf(game.Players.LocalPlayer) then
+                local args = {
+                    [1] = {
+                        ["partPositions"] = {
+                            [1] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame),
+                            [2] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame),
+                            [3] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame),
+                            [4] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame),
+                            [5] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame),
+                            [6] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame),
+                            [7] = Vector3.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                        },
+                        ["partSize"] = Vector3.new(999999, 0.5, 9999.99999999999999999999)
+                    }
+                }
+
+                game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("SpiritBridgeEnter"):InvokeServer(unpack(args))
             end
-        end)
-    else
-        if Connection then Connection:Disconnect() end
+        until false
     end
 end)
